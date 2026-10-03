@@ -1,0 +1,15 @@
+Upload directory
+Specification:  /totalview/ftp/switches/customer<X>/<acdid#>/	
+Example:        /totalview/ftp/switches/customer1/21/
+Question:      What is QAS customer number
+Question:      What is QAS acd id
+
+Upload filename
+Specification:	MMDDYY.HHMM.xml
+Example: 	040625.1200.xml
+
+Configuration
+Specification:	
+Example: 
+
+
