@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import argparse
 import re
 import sys
 import xml.etree.ElementTree as ET
@@ -16,6 +15,11 @@ REPORT_RE = re.compile(
     r"^(CALL GROUP REPORT|AGENT DETAIL REPORT)\s+(\d{2}/\d{2}/\d{2})\s+"
     r"(\d{2}:\d{2})-(\d{2}:\d{2})$"
 )
+
+INPUTDIR = "input"
+INPUTFILE = "sample.iex"
+OUTPUTDIR = "output"
+VENDOR = "IEX"
 
 
 @dataclass(frozen=True)
@@ -175,16 +179,10 @@ def to_xml(report: Report, vendor: str = "IEX") -> ET.ElementTree:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("input", type=Path)
-    parser.add_argument("-o", "--output", type=Path, required=True)
-    parser.add_argument("--vendor", default="IEX")
-    args = parser.parse_args()
     try:
-        report = parse_report(args.input.read_text(encoding="utf-8"))
-        tree = to_xml(report, args.vendor)
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        tree.write(args.output, encoding="utf-8", xml_declaration=True)
+        report = parse_report(Path(INPUTDIR + "/" + INPUTFILE).read_text(encoding="utf-8"))
+        tree = to_xml(report, VENDOR)
+        tree.write(Path(OUTPUTDIR + "/TEST_" + datetime.now().strftime("%m%d%y.%H%M%S") + ".xml"), encoding="utf-8", xml_declaration=True)
     except (OSError, ValueError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
