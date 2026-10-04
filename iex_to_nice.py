@@ -145,9 +145,9 @@ def to_xml(report: Report, vendor: str = "IEX") -> ET.ElementTree:
         data = ET.SubElement(queue_node, "QueueData")
         ET.SubElement(data, "QueueValue").text = record.queue
         _count(data, "ContactsReceived", record.answer + record.abandon)
+        _count(data, "AbandonedShort", record.abandoned_short)
         _count(data, "AbandonedLong", record.abandon)
         _count(data, "HandledShort", record.answered_short)
-        _count(data, "AbandonedShort", record.abandoned_short)
         _duration(data, "HandleTime", record.talk_seconds)
         _duration(data, "QueueDelayTime", record.delay_seconds)
 
