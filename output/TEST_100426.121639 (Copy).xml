@@ -1,4 +1,4 @@
-<?xml version="1.0"?><!DOCTYPE HistPlugin SYSTEM "HistPlugin.dtd">
+<?xml version='1.0' encoding='utf-8'?>
 <HistPlugin>
   <DataSourceNode>
     <Vendor>IEX</Vendor>

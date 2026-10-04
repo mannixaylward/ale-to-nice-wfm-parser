@@ -182,6 +182,7 @@ def main() -> int:
     try:
         report = parse_report(Path(INPUTDIR + "/" + INPUTFILE).read_text(encoding="utf-8"))
         tree = to_xml(report, VENDOR)
+        #added seconds for timestamp to avoid overwriting files when running multiple times in a minute
         tree.write(Path(OUTPUTDIR + "/TEST_" + datetime.now().strftime("%m%d%y.%H%M%S") + ".xml"), encoding="utf-8", xml_declaration=True)
     except (OSError, ValueError) as exc:
         print(f"error: {exc}", file=sys.stderr)
